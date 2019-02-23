@@ -1,7 +1,12 @@
 {
     "name": "Notes App",
     "short_name": "Notes App",
-    "icons": [],
+    "icons": [
+      {
+        "src": "./icon.png",
+        "type": "image/png"
+      }
+    ],
     "start_url": "./index.html",
     "scope": "./",
     "display": "standalone",
