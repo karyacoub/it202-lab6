@@ -6,9 +6,8 @@
 	<meta name="viewport" content="width=device-width">
     <title>Notes App</title>
     <link rel='manifest' href='./manifest.json'>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	 crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
 
 	<style>
 		.content {
@@ -16,6 +15,7 @@
 			margin: 1em;
 		}
 	</style>
+
 
 </head>
 
@@ -31,21 +31,24 @@
             <a class="nav-link" href="#home">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#screen2">Create</a>
+            <a class="nav-link" href="#create">Create</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#screen3">Detail</a>
+            <a class="nav-link" href="#detail">Detail</a>
         </li>
         </ul>
     </div>
     </nav>
     <div class="content" id="home">
-        Home page
+        <ul id="note-list">
+        </ul>
     </div>
-    <div class="content" id="screen2">
-        This is screen 2
+    <div class="content" id="create">
+        <input type="text" id="note" class="form-control" placeholder="Note...">
+        <textarea type="text" id="note-details" class="form-control" placeholder="Note details..."></textarea>
+        <button id="create-note" class="btn btn-primary btn-lg btn-block">Create</button>
     </div>
-    <div class="content" id="screen3">
+    <div class="content" id="detail">
         This is screen 3
     </div>
 
@@ -53,7 +56,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
       
-
     <script>
         $(document).ready(function() {
 
@@ -67,7 +69,9 @@
             $(target).show();
             });
         });
+    </script>
 
+    <script>
         // register the service worker for offline use
         if('serviceWorker' in navigator) {
           navigator.serviceWorker
