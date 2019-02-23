@@ -114,9 +114,16 @@
             notesList.empty();
 
             await db.notes.each(function(elem){
-                var newNote = $('<li>');
+                var newNote = $('<a>');
+                newNote.attr('href', '#detail');
                 newNote.addClass('list-group-item');
+                newNote.addClass('list-group-item-action');
                 newNote.text(elem.note);
+                newNote.on('click', function(){
+                    $('.content').hide();
+                    var target = $(this).attr("href");
+                    $(target).show();
+                });
 
                 notesList.append(newNote);
             });
