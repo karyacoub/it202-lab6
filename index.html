@@ -79,5 +79,29 @@
                    .then(function() { console.log("Service Worker Registered"); });
         }
     </script>
+
+    <script>
+        var db = new Dexie("notesDB");
+        db.version(1).stores({
+            notes: 'id++, note, description'
+        });
+
+        $('#create-note').on('click', function() {
+            var noteElem = $('#note');
+            var descriptionElem = $('#note-details');
+            var noteVal = noteElem.val();
+            var descriptionVal = descriptionElem.val();
+
+            // clear old note
+            noteElem.val('');
+            descriptionElem.val('');
+
+            // add new note to db
+            if(noteVal && descriptionVal)
+            {
+                db.notes.put({note: noteVal, description: descriptionVal});
+            }
+        });
+    </script>
   </body>
 </html>
