@@ -116,6 +116,7 @@
             await db.notes.each(function(elem){
                 var newNote = $('<a>');
                 newNote.attr('href', '#detail');
+                newNote.attr('data-id', elem.id)
                 newNote.addClass('list-group-item');
                 newNote.addClass('list-group-item-action');
                 newNote.text(elem.note);
@@ -123,7 +124,7 @@
                     $('.content').hide();
                     var target = $(this).attr("href");
 
-                    showDetails(elem.note);
+                    showDetails(elem.id);
 
                     $(target).show();
                 });
@@ -134,9 +135,9 @@
             $('a[href="#home"').trigger('click');
         }
 
-        async function showDetails(noteVal)
+        async function showDetails(noteID)
         {
-            var details = await db.notes.where('note').equals(noteVal).each(function(elem) {
+            var details = await db.notes.where('id').equals(noteID).each(function(elem) {
                 $('#detail-text').text(elem.description);
             });
         }
